@@ -5,7 +5,7 @@ import './Row.css';
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Row(props) {
-    const { title, fetchUrl } = props;
+    const { title, fetchUrl, isLargeRow } = props;
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
@@ -22,9 +22,8 @@ function Row(props) {
             <h2>{title}</h2>
             <div className="row__posters">
                 {movies.map(movie => {
-                    //only renders if movie has poster path to show image
-                    if(movie.poster_path)
-                        return <img key={movie.id} className="row__poster" src={base_url+movie.poster_path} alt={movie.name} />
+                    if(movie.poster_path && movie.backdrop_path)
+                        return <img key={movie.id} className={`row__poster ${isLargeRow && "row__posterLarge"}`} src={`${base_url}${isLargeRow ? movie.poster_path: movie.backdrop_path}`} alt={movie.name} />
                 })}
             </div>
         </div>
