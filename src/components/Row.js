@@ -22,7 +22,9 @@ function Row(props) {
             <h2>{title}</h2>
             <div className="row__posters">
                 {movies.map(movie => {
-                    return <img className="row__poster" src={base_url+movie.poster_path} alt={movie.name} />
+                    //only renders if movie has poster path to show image
+                    if(movie.poster_path)
+                        return <img key={movie.id} className="row__poster" src={base_url+movie.poster_path} alt={movie.name} />
                 })}
             </div>
         </div>
