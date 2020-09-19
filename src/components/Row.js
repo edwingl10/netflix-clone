@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from '../axios';
 import './Row.css';
 
@@ -22,8 +23,19 @@ function Row(props) {
             <h2>{title}</h2>
             <div className="row__posters">
                 {movies.map(movie => {
-                    if(movie.poster_path && movie.backdrop_path)
-                        return <img key={movie.id} className={`row__poster ${isLargeRow && "row__posterLarge"}`} src={`${base_url}${isLargeRow ? movie.poster_path: movie.backdrop_path}`} alt={movie.name} />
+                    if(movie.poster_path && movie.backdrop_path){
+                        return (
+                            <Link to={{
+                                pathname: `/${movie.id}`,
+                                state: {
+                                    info: movie
+                                }
+                            }} 
+                            key={movie.id}>
+                                <img key={movie.id} className={`row__poster ${isLargeRow && "row__posterLarge"}`} src={`${base_url}${isLargeRow ? movie.poster_path: movie.backdrop_path}`} alt={movie.name} />
+                            </Link>
+                        );
+                    }
                 })}
             </div>
         </div>
