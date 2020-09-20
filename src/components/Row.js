@@ -6,7 +6,7 @@ import './Row.css';
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 function Row(props) {
-    const { title, fetchUrl, isLargeRow } = props;
+    const { title, fetchUrl, isLargeRow, show } = props;
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
@@ -27,9 +27,7 @@ function Row(props) {
                         return (
                             <Link to={{
                                 pathname: `/${movie.id}`,
-                                state: {
-                                    info: movie
-                                }
+                                state: {show} 
                             }} 
                             key={movie.id}>
                                 <img key={movie.id} className={`row__poster ${isLargeRow && "row__posterLarge"}`} src={`${base_url}${isLargeRow ? movie.poster_path: movie.backdrop_path}`} alt={movie.name} />
