@@ -3,6 +3,7 @@ import axios from '../axios';
 import { showRequests } from '../requests';
 import { truncate } from '../truncate';
 import './Banner.css';
+import Buttons from './Buttons';
 
 function Banner(){
     const [movie, setMovie] = useState([]);
@@ -21,10 +22,7 @@ function Banner(){
         <header className="banner" style={{backgroundSize:"cover", backgroundPosition:"top", backgroundImage:`url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`}}>
             <div className="banner__contents">
                 <h1 className="banner__title">{movie?.title || movie?.name || movie?.original_name}</h1>
-                <div className="banner__buttons">
-                    <button className="banner__button">Play</button>
-                    <button className="banner__button">My List</button>
-                </div>
+                <Buttons movie={movie} />
                 <h1 className="banner__description">{truncate(movie?.overview, 150)}</h1>
             </div>
 
@@ -34,3 +32,9 @@ function Banner(){
 }
 
 export default Banner;
+/* 
+                <div className="banner__buttons">
+                    <button className="banner__button">Play</button>
+                    <button className="banner__button">+ My List</button>
+                </div>
+*/
