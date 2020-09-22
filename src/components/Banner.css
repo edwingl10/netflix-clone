@@ -1,6 +1,5 @@
 .banner{
     object-fit: contain;
-    height: 448px;
 }
 .banner__contents{
     color: #fff;
@@ -9,9 +8,9 @@
     height: 190px;
 }
 .banner__title{
-    font-size: 3rem;
+    font-size: 30px;
     font-weight: 800;
-    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
 }
 .banner__description{
     width: 45rem;
