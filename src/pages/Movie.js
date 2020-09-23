@@ -34,18 +34,18 @@ function Movie(props){
         }
         fetchMovieData();
     }, [id, show]);
-
+    //console.log(movie.id);
     return(
         <div className="movie">
             <div className="movie-container">
                 <div className="movie-text">
-                    <h2>{show ? movie.original_name: movie.original_title}</h2>
+                    <h2>{show ? movie.name: movie.title}</h2>
                     <p className="info">{`${show ? releaseFormat(movie.first_air_date) : releaseFormat(movie.release_date)} | ${show ? seasonsFormat(movie.number_of_seasons): runtimeFormat(movie.runtime)} | ${getGenre(movie.genres)} | rating: ${movie.vote_average}`}</p>
-                    <Buttons movie={movie} />
+                    <Buttons movie={movie} show={show} />
                     <p className="overview">{movie.overview}</p>
                 </div>
                 <div className="movie-img">
-                    <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt={`${movie.original_name}`} /> 
+                    <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt={`${show ? movie.name : movie.title}`} /> 
                     <div className="img-fadeLeft" />
                 </div>
             </div>

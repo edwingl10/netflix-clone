@@ -23,12 +23,11 @@ function Row(props) {
     return (
         <div className="row">
             <h2>{title}</h2>
-            <LazyLoad once={true} height={170} offset={1000}>
             <div className="row__posters">
                 {movies.map(movie => {
                     if(movie.poster_path){
                         return (
-                            <LazyLoad key={movie.id} placeholder={<ImgPlaceholder />} once={true} height={170} offset={200}>
+                            <LazyLoad key={movie.id} placeholder={<ImgPlaceholder />} once={true} height={174} offset={20}>
                             <Link to={{
                                 pathname: `/${movie.id}`,
                                 state: {show} 
@@ -41,7 +40,6 @@ function Row(props) {
                     }
                 })}
             </div>
-            </LazyLoad>
         </div>
     )
 }

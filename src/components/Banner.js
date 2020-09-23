@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../axios';
-import { showRequests } from '../requests';
+import { movieRequests } from '../requests';
 import { truncate } from '../truncate';
 import './Banner.css';
 import Buttons from './Buttons';
 
+
 function Banner(){
     const [movie, setMovie] = useState([]);
+    const bannerStyle={
+        backgroundSize:"cover", 
+        backgroundPosition:"top", 
+        backgroundImage: movie ? `url("https://image.tmdb.org/t/p/original/${movie.backdrop_path}")`: 'url("")',
+    }
 
     useEffect(() => {
         async function fetchData(){
-            const request = await axios.get(showRequests.fetchNetflixOriginals);
+            const request = await axios.get(movieRequests.fetchTrendingMovies);
             setMovie(
                 request.data.results[ Math.floor(Math.random() * request.data.results.length)]
             );
         }
         fetchData();
     }, [])
-
+    
     return(
-        <header className="banner" style={{backgroundSize:"cover", backgroundPosition:"top", backgroundImage:`url("https://image.tmdb.org/t/p/original/${movie?.backdrop_path}")`}}>
+        <header className="banner" style={bannerStyle}>
             <div className="banner__contents">
                 <h1 className="banner__title">{movie?.title || movie?.name || movie?.original_name}</h1>
                 <Buttons movie={movie} />
