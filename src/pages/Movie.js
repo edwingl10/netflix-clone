@@ -25,6 +25,7 @@ function Movie(props){
     const [movie, setMovie] = useState({});
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         async function fetchMovieData(){
             const url = `${show ? "/tv" : "/movie"}/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
             const request = await axios.get(url)
