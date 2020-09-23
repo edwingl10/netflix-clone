@@ -12,6 +12,10 @@ function Home() {
       <Row title="NETFLIX ORIGINALS" fetchUrl={showRequests.fetchNetflixOriginals} isLargeRow show />
       <Row title="Trending" fetchUrl={movieRequests.fetchTrendingMovies} />
       <Row title="Top Rated" fetchUrl={movieRequests.fetchTopRated} />
+      <Row title="Action Movies" fetchUrl={movieRequests.fetchActionMovies} />
+      <Row title="Adventure Movies" fetchUrl={movieRequests.fetchAdventureMovies} />
+      <Row title="Animation Movies" fetchUrl={movieRequests.fetchAnimationMovies} />
+      
     </div>
   );
 }

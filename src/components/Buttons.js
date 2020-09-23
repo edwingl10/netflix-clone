@@ -20,7 +20,7 @@ function Buttons(props){
             .then(response => {
                 setTrailerUrl(response.data["items"][0]["id"]["videoId"]);
             })
-            .catch(error => setTrailerUrl("pS-gbqbVd8c"));
+            .catch(error => setTrailerUrl("phG4_0MpT4M"));
         }
     }, [movie]);
 

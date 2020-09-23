@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from '../axios';
 import './Row.css';
+import ImgPlaceholder from './ImgPlaceholder';
+import LazyLoad from 'react-lazyload';
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -21,10 +23,12 @@ function Row(props) {
     return (
         <div className="row">
             <h2>{title}</h2>
+            <LazyLoad once={true} height={100} offset={1000}>
             <div className="row__posters">
                 {movies.map(movie => {
                     if(movie.poster_path && movie.backdrop_path){
                         return (
+                            <LazyLoad key={movie.id} placeholder={<ImgPlaceholder />} once={true} height={100} offset={200}>
                             <Link to={{
                                 pathname: `/${movie.id}`,
                                 state: {show} 
@@ -32,10 +36,12 @@ function Row(props) {
                             key={movie.id}>
                                 <img key={movie.id} className={`row__poster ${isLargeRow && "row__posterLarge"}`} src={`${base_url}${isLargeRow ? movie.poster_path: movie.backdrop_path}`} alt={movie.name} />
                             </Link>
+                            </LazyLoad>
                         );
                     }
                 })}
             </div>
+            </LazyLoad>
         </div>
     )
 }
