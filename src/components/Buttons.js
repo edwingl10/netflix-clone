@@ -27,7 +27,7 @@ function Buttons(props){
             })
             .catch(error => setTrailerUrl("phG4_0MpT4M"));
         }
-    }, [movie]);
+    }, [movie, show]);
 
     return(
         <div className="banner__buttons">

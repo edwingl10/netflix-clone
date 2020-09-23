@@ -5,6 +5,7 @@ import './Movie.css';
 import Row from '../components/Row';
 import { requestSimilar } from '../requests';
 import Buttons from '../components/Buttons';
+import { truncate } from '../truncate';
 
 function seasonsFormat(num){
     return num > 1 ? `${num} Seasons` : `${num} Season`;
@@ -42,7 +43,7 @@ function Movie(props){
                     <h2>{show ? movie.name: movie.title}</h2>
                     <p className="info">{`${show ? releaseFormat(movie.first_air_date) : releaseFormat(movie.release_date)} | ${show ? seasonsFormat(movie.number_of_seasons): runtimeFormat(movie.runtime)} | ${getGenre(movie.genres)} | rating: ${movie.vote_average}`}</p>
                     <Buttons movie={movie} show={show} />
-                    <p className="overview">{movie.overview}</p>
+                    <p className="overview">{truncate(movie.overview, 400)}</p>
                 </div>
                 <div className="movie-img">
                     <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt={`${show ? movie.name : movie.title}`} /> 
@@ -50,8 +51,8 @@ function Movie(props){
                 </div>
             </div>
             
-            <Row title={`More ${getGenre(movie.genres)}`} fetchUrl={requestSimilar(show, id, 1)} show={show} />
-            <Row title="You Might Also Like" fetchUrl={requestSimilar(show, id, 2)} show={show} />
+            <Row title={`More ${getGenre(movie.genres)}`} fetchUrl={requestSimilar(show, id, "similar")} show={show} />
+            <Row title={`Recommended`} fetchUrl={requestSimilar(show, id, "recommendations")} show={show} />
         </div>
     )
 }

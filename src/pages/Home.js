@@ -8,9 +8,10 @@ function Home() {
   return (
     <div className="home">
       <Banner />
-      
+
       <Row title="NETFLIX ORIGINALS" fetchUrl={showRequests.fetchNetflixOriginals} isLargeRow show />
       <Row title="Trending" fetchUrl={movieRequests.fetchTrendingMovies} />
+      <Row title="Now Playing" fetchUrl={movieRequests.fetchNowPlaying} />
       <Row title="Top Rated" fetchUrl={movieRequests.fetchTopRated} />
 
       <Row title="Action" fetchUrl={movieRequests.fetchActionMovies} />

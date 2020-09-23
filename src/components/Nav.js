@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import profilePic from '../images/user_icon.jpg';
 import './Nav.css';
 
@@ -18,7 +19,9 @@ function Nav(){
 
     return(
         <div className={`nav ${show && "nav__black"}`}>
-            <img className="nav__logo" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo"/>
+            <Link to="/">
+                <img className="nav__logo" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo"/>
+            </Link>
             <img className="nav__avatar" src={profilePic} alt="user avatar"/>
         </div>
     )

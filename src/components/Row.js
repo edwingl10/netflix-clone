@@ -14,7 +14,7 @@ function Row(props) {
     useEffect(() => {
         async function fetchData(){
             const request = await axios.get(fetchUrl);
-            setMovies(request.data.results);
+            request.status === 200 && setMovies(request.data.results);
             return request;
         }
         fetchData();
@@ -22,10 +22,10 @@ function Row(props) {
 
     return (
         <div className="row">
-            <h2>{title}</h2>
+            <h2>{movies.length !== 0 && title}</h2>
             <div className="row__posters">
                 {movies.map(movie => {
-                    if(movie.poster_path){
+                    if(movie.poster_path && movie.backdrop_path){
                         return (
                             <LazyLoad key={movie.id} placeholder={<ImgPlaceholder />} once={true} height={174} offset={20}>
                             <Link to={{

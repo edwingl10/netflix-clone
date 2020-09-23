@@ -16,7 +16,7 @@ function Banner(){
 
     useEffect(() => {
         async function fetchData(){
-            const request = await axios.get(movieRequests.fetchTrendingMovies);
+            const request = await axios.get(movieRequests.fetchNowPlaying);
             setMovie(
                 request.data.results[ Math.floor(Math.random() * request.data.results.length)]
             );
@@ -28,7 +28,7 @@ function Banner(){
         <header className="banner" style={bannerStyle}>
             <div className="banner__contents">
                 <h1 className="banner__title">{movie?.title || movie?.name || movie?.original_name}</h1>
-                <Buttons movie={movie} />
+                <Buttons movie={movie} show={false} />
                 <h1 className="banner__description">{truncate(movie?.overview, 150)}</h1>
             </div>
 
@@ -38,9 +38,3 @@ function Banner(){
 }
 
 export default Banner;
-/* 
-                <div className="banner__buttons">
-                    <button className="banner__button">Play</button>
-                    <button className="banner__button">+ My List</button>
-                </div>
-*/

@@ -1,6 +1,7 @@
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const movieRequests = {
+    fetchNowPlaying: `/movie/now_playing?api_key=${API_KEY}&language=en-US`,
     fetchTrendingMovies: `/trending/movie/week?api_key=${API_KEY}&language=en-US`,
     fetchTopRated: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
     fetchActionMovies: `/discover/movie?api_key=${API_KEY}&with_genres=28`,
@@ -42,6 +43,7 @@ export const showRequests = {
     fetchWesternShows: `/discover/tv?api_key=${API_KEY}&with_genres=37`
 }
 
-export function requestSimilar(show, id, page){
-    return `https://api.themoviedb.org/3/${show ? "tv" : "movie"}/${id}/similar?api_key=${API_KEY}&language=en-US&page=${page}`;
+export function requestSimilar(show, id, fetch){
+    return `https://api.themoviedb.org/3/${show ? "tv" : "movie"}/${id}/${fetch}?api_key=${API_KEY}&language=en-US`;
 }
+//https://api.themoviedb.org/3/tv/71446/recommendations?api_key=b3e16a9bb2febe44b0e90857772df5d3&language=en-US&page=1
