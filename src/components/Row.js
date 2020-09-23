@@ -23,18 +23,18 @@ function Row(props) {
     return (
         <div className="row">
             <h2>{title}</h2>
-            <LazyLoad once={true} height={100} offset={1000}>
+            <LazyLoad once={true} height={170} offset={1000}>
             <div className="row__posters">
                 {movies.map(movie => {
-                    if(movie.poster_path && movie.backdrop_path){
+                    if(movie.poster_path){
                         return (
-                            <LazyLoad key={movie.id} placeholder={<ImgPlaceholder />} once={true} height={100} offset={200}>
+                            <LazyLoad key={movie.id} placeholder={<ImgPlaceholder />} once={true} height={170} offset={200}>
                             <Link to={{
                                 pathname: `/${movie.id}`,
                                 state: {show} 
                             }} 
                             key={movie.id}>
-                                <img key={movie.id} className={`row__poster ${isLargeRow && "row__posterLarge"}`} src={`${base_url}${isLargeRow ? movie.poster_path: movie.backdrop_path}`} alt={movie.name} />
+                                <img key={movie.id} className={`row__poster ${isLargeRow && "row__posterLarge"}`} src={`${base_url}${movie.poster_path}`} alt={movie.name} />
                             </Link>
                             </LazyLoad>
                         );
