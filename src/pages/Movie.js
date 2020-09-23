@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from '../axios';
 import './Movie.css';
 import Row from '../components/Row';
-import { movieRequests, showRequests } from '../requests';
+import { requestSimilar } from '../requests';
 import Buttons from '../components/Buttons';
 
 function seasonsFormat(num){
@@ -49,9 +49,8 @@ function Movie(props){
                 </div>
             </div>
             
-            <Row title="NETFLIX ORIGINALS" fetchUrl={showRequests.fetchNetflixOriginals} isLargeRow show />
-            <Row title="Trending" fetchUrl={movieRequests.fetchTrendingMovies} />
-            <Row title="Top Rated" fetchUrl={movieRequests.fetchTopRated} />
+            <Row title={`More ${getGenre(movie.genres)}`} fetchUrl={requestSimilar(show, id, 1)} show={show} />
+            <Row title="You Might Also Like" fetchUrl={requestSimilar(show, id, 2)} show={show} />
         </div>
     )
 }
