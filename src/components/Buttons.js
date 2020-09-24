@@ -6,28 +6,35 @@ import axios from 'axios';
 
 const base_url = " https://api.themoviedb.org/3/";
 
+
 function Buttons(props){
     const [open, setOpen] = useState(false);
     const [trailerUrl, setTrailerUrl] = useState('');
     const openModal = () => {setOpen(true)}
     const closeModal = () => {setOpen(false)}
-    const { movie, show } = props;
+    const { movie, show, videos } = props;
+
+    function getTrailer(trailers){
+        let trailer = '';
+        trailers.forEach(res =>{
+            res.type === "Trailer" && (trailer = res.key)
+        });
+        trailer ? setTrailerUrl(trailer) : setTrailerUrl("SqSiUVUvVCE");
+    }
 
     useEffect(() =>{
-        if(movie?.name || movie?.title){
+        if(videos){
+            getTrailer(videos.results);
+        }
+        else if(movie?.name || movie?.title){
             axios.get(`${base_url}${show ? "tv": "movie"}/${movie.id}/videos?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`)
             .then(response => {
-                const results = response.data["results"];
-                let trailer = '';
-
-                results.forEach(res =>{
-                    res.type === "Trailer" && (trailer = res.key)
-                });
-                trailer ? setTrailerUrl(trailer) : setTrailerUrl("SqSiUVUvVCE");
+                getTrailer(response.data["results"]);
             })
             .catch(error => setTrailerUrl("SqSiUVUvVCE"));
         }
-    }, [movie, show]);
+
+    }, [movie, show, videos]);
 
     return(
         <div className="banner__buttons">

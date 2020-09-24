@@ -23,7 +23,7 @@ function Banner(){
         }
         fetchData();
     }, [])
-    
+ 
     return(
         <header className="banner" style={bannerStyle}>
             <div className="banner__contents">

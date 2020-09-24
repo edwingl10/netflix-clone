@@ -27,7 +27,6 @@ function Home() {
       <Row title="Horror" fetchUrl={movieRequests.fetchHorrorMovies} />
       <Row title="Kids" fetchUrl={showRequests.fetchKidShows} show />
       <Row title="Mystery Shows" fetchUrl={showRequests.fetchMysteryShows} show />
-      <Row title="News" fetchUrl={showRequests.fetchNewsShows} show />
       <Row title="Reality" fetchUrl={showRequests.fetchRealityShows} show />
       <Row title="Romance" fetchUrl={movieRequests.fetchRomanceMovies} />
       <Row title="Scifi" fetchUrl={movieRequests.fetchScifiMovies} />

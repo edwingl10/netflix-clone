@@ -20,16 +20,20 @@ function releaseFormat(date){
     return date && date.split("-")[0];
 }
 
+
 function Movie(props){
     const { id } = useParams();
     const { show } = props.location.state;
     const [movie, setMovie] = useState({});
+    const [imgUrl, setImgUrl] = useState("");
 
     useEffect(() => {
+        setImgUrl("");
         window.scrollTo(0, 0);
         async function fetchMovieData(){
-            const url = `${show ? "/tv" : "/movie"}/${id}?api_key=${process.env.REACT_APP_API_KEY}`;
-            const request = await axios.get(url)
+            const url = `${show ? "/tv" : "/movie"}/${id}?api_key=${process.env.REACT_APP_API_KEY}&append_to_response=videos`;
+            const request = await axios.get(url);
+            setImgUrl(`https://image.tmdb.org/t/p/original/${request.data?.backdrop_path}`);
             setMovie(request.data);
             return request;
         }
@@ -41,16 +45,16 @@ function Movie(props){
             <div className="movie-container">
                 <div className="movie-text">
                     <h2>{show ? movie.name: movie.title}</h2>
-                    <p className="info">{`${show ? releaseFormat(movie.first_air_date) : releaseFormat(movie.release_date)} | ${show ? seasonsFormat(movie.number_of_seasons): runtimeFormat(movie.runtime)} | ${getGenre(movie.genres)} | rating: ${movie.vote_average}`}</p>
-                    <Buttons movie={movie} show={show} />
+                    <p className="info">{`${show ? releaseFormat(movie.first_air_date) : releaseFormat(movie.release_date)} | ${show ? seasonsFormat(movie.number_of_seasons): runtimeFormat(movie.runtime)} | ${getGenre(movie.genres)} | Rating: ${movie.vote_average}`}</p>
+                    <Buttons movie={movie} show={show} videos={movie.videos} />
                     <p className="overview">{truncate(movie.overview, 400)}</p>
                 </div>
                 <div className="movie-img">
-                    {movie && movie.backdrop_path ? <img src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`} alt={`${show ? movie.name : movie.title}`} /> : <img src="" alt=""/>}
+                    {imgUrl ? <img src={imgUrl} alt={`${show ? movie.name : movie.title}`} /> : <div/> } 
                     <div className="img-fadeLeft" />
                 </div>
-            </div>
-            
+            </div>    
+
             <Row title={`More ${getGenre(movie.genres)}`} fetchUrl={requestSimilar(show, id, "similar")} show={show} />
             <Row title={`Recommended`} fetchUrl={requestSimilar(show, id, "recommendations")} show={show} />
         </div>

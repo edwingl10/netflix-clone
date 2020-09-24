@@ -35,7 +35,6 @@ export const showRequests = {
     fetchFamilyShows: `/discover/tv?api_key=${API_KEY}&with_genres=10751`,
     fetchKidShows: `/discover/tv?api_key=${API_KEY}&with_genres=10762`,
     fetchMysteryShows: `/discover/tv?api_key=${API_KEY}&with_genres=9648`,
-    fetchNewsShows: `/discover/tv?api_key=${API_KEY}&with_genres=10763`,
     fetchRealityShows: `/discover/tv?api_key=${API_KEY}&with_genres=10764`,
     fetchScifiFantasyShows: `/discover/tv?api_key=${API_KEY}&with_genres=10765`,
     fetchTalkShows: `/discover/tv?api_key=${API_KEY}&with_genres=10767`,
@@ -46,4 +45,3 @@ export const showRequests = {
 export function requestSimilar(show, id, fetch){
     return `https://api.themoviedb.org/3/${show ? "tv" : "movie"}/${id}/${fetch}?api_key=${API_KEY}&language=en-US`;
 }
-//https://api.themoviedb.org/3/tv/71446/recommendations?api_key=b3e16a9bb2febe44b0e90857772df5d3&language=en-US&page=1
