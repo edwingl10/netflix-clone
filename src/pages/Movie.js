@@ -7,6 +7,7 @@ import { requestSimilar } from '../requests';
 import Buttons from '../components/Buttons';
 import { truncate } from '../truncate';
 
+
 function seasonsFormat(num){
     return num > 1 ? `${num} Seasons` : `${num} Season`;
 }
