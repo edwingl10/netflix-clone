@@ -5,7 +5,7 @@ import './Row.css';
 import ImgPlaceholder from './ImgPlaceholder';
 import LazyLoad from 'react-lazyload';
 
-const base_url = "https://image.tmdb.org/t/p/original/";
+const base_url = "https://image.tmdb.org/t/p/w185/";
 
 function Row(props) {
     const { title, fetchUrl, isLargeRow, show } = props;

@@ -34,7 +34,7 @@ function Movie(props){
         async function fetchMovieData(){
             const url = `${show ? "/tv" : "/movie"}/${id}?api_key=${process.env.REACT_APP_API_KEY}&append_to_response=videos`;
             const request = await axios.get(url);
-            setImgUrl(`https://image.tmdb.org/t/p/original/${request.data?.backdrop_path}`);
+            setImgUrl(`https://image.tmdb.org/t/p/w780/${request.data?.backdrop_path}`);
             setMovie(request.data);
             return request;
         }
