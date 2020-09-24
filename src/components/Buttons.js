@@ -23,9 +23,9 @@ function Buttons(props){
                 results.forEach(res =>{
                     res.type === "Trailer" && (trailer = res.key)
                 });
-                trailer ? setTrailerUrl(trailer) : setTrailerUrl("phG4_0MpT4M");
+                trailer ? setTrailerUrl(trailer) : setTrailerUrl("SqSiUVUvVCE");
             })
-            .catch(error => setTrailerUrl("phG4_0MpT4M"));
+            .catch(error => setTrailerUrl("SqSiUVUvVCE"));
         }
     }, [movie, show]);
 

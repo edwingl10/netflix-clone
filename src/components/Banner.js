@@ -11,7 +11,7 @@ function Banner(){
     const bannerStyle={
         backgroundSize:"cover", 
         backgroundPosition:"top", 
-        backgroundImage: movie ? `url("https://image.tmdb.org/t/p/original/${movie.backdrop_path}")`: 'url("")',
+        backgroundImage: movie && movie.backdrop_path ? `url("https://image.tmdb.org/t/p/original/${movie.backdrop_path}")`: 'url("")'
     }
 
     useEffect(() => {

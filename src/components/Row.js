@@ -38,6 +38,9 @@ function Row(props) {
                             </LazyLoad>
                         );
                     }
+                    else{
+                        return <div key={movie.id}/>
+                    }
                 })}
             </div>
         </div>

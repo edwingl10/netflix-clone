@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import {useHistory, useLocation, matchPath } from 'react-router-dom';
 import profilePic from '../images/user_icon.jpg';
 import './Nav.css';
 
 function Nav(){
     const [show, handleShow] = useState(false);
+    let history = useHistory();
+    let location = useLocation();
+
+    function clickNav(){
+        matchPath(location.pathname, {path:'/:id'}) ? history.push("/") : window.scrollTo(0,0);
+    }
 
     useEffect(() => {
         window.addEventListener("scroll", ()=> {
@@ -19,9 +25,7 @@ function Nav(){
 
     return(
         <div className={`nav ${show && "nav__black"}`}>
-            <Link to="/">
-                <img className="nav__logo" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo"/>
-            </Link>
+            <img className="nav__logo" onClick={clickNav} src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo"/>
             <img className="nav__avatar" src={profilePic} alt="user avatar"/>
         </div>
     )

@@ -35,7 +35,7 @@ function Movie(props){
         }
         fetchMovieData();
     }, [id, show]);
-    //console.log(movie.id);
+    
     return(
         <div className="movie">
             <div className="movie-container">
@@ -46,7 +46,7 @@ function Movie(props){
                     <p className="overview">{truncate(movie.overview, 400)}</p>
                 </div>
                 <div className="movie-img">
-                    <img src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`} alt={`${show ? movie.name : movie.title}`} /> 
+                    {movie && movie.backdrop_path ? <img src={`https://image.tmdb.org/t/p/original/${movie?.backdrop_path}`} alt={`${show ? movie.name : movie.title}`} /> : <img src="" alt=""/>}
                     <div className="img-fadeLeft" />
                 </div>
             </div>
