@@ -42,6 +42,13 @@ export const showRequests = {
     fetchWesternShows: `/discover/tv?api_key=${API_KEY}&with_genres=37`
 }
 
+export const latestRequests = {
+    fetchNowPlaying: `/movie/now_playing?api_key=${API_KEY}&language=en-US`,
+    fetchAiringToday: `tv/airing_today?api_key=${API_KEY}&language=en-US`,
+    fetchUpcoming: `/movie/upcoming?api_key=${API_KEY}&language=en-US`,
+    fetchOnair: `/tv/on_the_air?api_key=${API_KEY}&language=en-US`
+}
+
 export function requestSimilar(show, id, fetch){
     return `https://api.themoviedb.org/3/${show ? "tv" : "movie"}/${id}/${fetch}?api_key=${API_KEY}&language=en-US`;
 }
