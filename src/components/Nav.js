@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import {useHistory, useLocation, matchPath, Route } from 'react-router-dom';
+import { useHistory, useLocation, matchPath } from 'react-router-dom';
 import profilePic from '../images/user_icon.jpg';
 import './Nav.css';
 
 function Nav(){
     const [show, handleShow] = useState(false);
-    const [query, setQuery] = useState('');
-    const [pageNumber, setPageNumber] = useState(1);
     let history = useHistory();
     let location = useLocation();
 

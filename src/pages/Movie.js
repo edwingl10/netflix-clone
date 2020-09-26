@@ -25,7 +25,6 @@ function releaseFormat(date){
 function Movie(props){
     const { media, id } = useParams();
     const show = media === "tv" ? true: false;
-    //const { show } = props.location.state;
     const [movie, setMovie] = useState({});
     const [imgUrl, setImgUrl] = useState("");
 

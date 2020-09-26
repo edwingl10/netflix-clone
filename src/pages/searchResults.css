@@ -1,4 +1,27 @@
 .search__bar{
-    margin: 60px auto;
+    position: fixed;
     width: 50%;
+    height: 30px;
+    top: 60px;
+    z-index: 2;
 }
+.results{
+    display: block;
+}
+.null{
+    display: none;
+}
+.poster{
+    display: inline-block;
+    object-fit: contain;
+    width: auto;
+    height: 170px;
+    max-height: 170px;
+    margin-right: 20px;
+    margin-bottom: 40px;
+    transition: transform 450ms;
+}
+/*
+.poster:hover{
+    transform: scale(1.05);
+}*/

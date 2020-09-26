@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { useParams, Link, useLocation } from 'react-router-dom';
-import axios from '../axios';
+import React, { useState, useRef, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import useQuerySearch from '../useQuerySearch';
 import './searchResults.css';
 
@@ -14,10 +13,14 @@ function SearchResults(){
     const observer = useRef();
 
     const lastMovieElement = useCallback(node => {
+        //console.log("hasmore: " + hasMore);
         if(loading) return
-        if(observer.current) observer.current.disconnect()
+        if(observer.current) observer.current.disconnect();
+
         observer.current = new IntersectionObserver(entries => {
+            //console.log(entries[0]);
             if(entries[0].isIntersecting && hasMore){
+                //console.log("active");
                 setPageNumber(prevPageNumber => prevPageNumber + 1);
             }
         })
@@ -37,18 +40,31 @@ function SearchResults(){
             </div>
         ) 
     }
- 
+
     return(
         <div>
             <input className="search__bar" onChange={handleChange}/>
+
+            <div className="results">
             {movies.map((movie,index) => {
+               //console.log(movie);
                 if(movies.length === index + 1){
-                    return <h1 ref={lastMovieElement} key={counter++} style={{color: "white"}}>{movie.id}</h1>
+                    return (
+                        <Link to={`/${movie.media_type === "tv" ? "tv": "movie"}/${movie.id}`} >
+                            <img ref={lastMovieElement} className="poster" key={counter++} src={`${base_url}${movie.poster_path}`} alt="test" />
+                        </Link>
+                    )
                 }else{
-                    return <h1 key={counter++} style={{color: "white"}}>{movie.id}</h1>
+                    return (
+                        <Link to={`/${movie.media_type === "tv" ? "tv": "movie"}/${movie.id}`} >
+                            <img className="poster" key={counter++} src={`${base_url}${movie.poster_path}`} alt="test" />
+                        </Link>
+                    )
                 }
+             
             })}
-            <div>{loading && 'Loading...'}</div>
+            </div>
+            
         </div>
     )
 }

@@ -22,18 +22,19 @@ export default function useQuerySearch(query, pageNumber){
             cancelToken: new axios.CancelToken(c => cancel = c)
         }).then(res => {
             setMovies(prevMovies => {
-                return [...prevMovies, ...res.data.results.map(el => {
-                    return{
-                        id: el.id,
-                        media_type: el.media_type,
-                        poster_path: el.poster_path,
-                        backdrop_path: el.backdrop_path
+                return [...prevMovies, ...res.data.results.filter(el => el.poster_path && el.backdrop_path).map(movie => {
+                    return {
+                        id: movie.id,
+                        name: movie.media_type === "tv"? movie.name: movie.title,
+                        poster_path: movie.poster_path,
+                        backdrop_path: movie.backdrop_path,
+                        media_type: movie.media_type,
                     }
                 })];
             });
-            setHasMore(res.data.results.length > 0);
+            setHasMore(res.data.total_pages > pageNumber);
             setLoading(false);
-            //console.log(res.data);
+            console.log(res.data);
         }).catch(e => {
             if(axios.isCancel(e)) return;
             setError(true);
