@@ -7,12 +7,14 @@ import ShowsResults from './pages/ShowsResults';
 import MoviesResults from './pages/MoviesResults';
 import MyList from './pages/MyList';
 import NowPlaying from './pages/NowPlaying';
+import SearchResults from './pages/SearchResults';
 
 function App() {
   return (
     <Router>
       <Nav />
       <Switch>
+        <Route path="/search" component={SearchResults} />
         <Route path="/shows" component={ShowsResults} />
         <Route path="/movies" component={MoviesResults} />
         <Route path="/new" component={NowPlaying} />

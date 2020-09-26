@@ -40,12 +40,13 @@ function Movie(props){
         }
         fetchMovieData();
     }, [id, show]);
-    
+
+
     return(
         <div className="movie">
             <div className="movie-container">
                 <div className="movie-text">
-                    <h2>{show ? movie.name: movie.title}</h2>
+                    <h2>{movie && show ? movie.name: movie.title}</h2>
                     <p className="info">{`${show ? releaseFormat(movie.first_air_date) : releaseFormat(movie.release_date)} | ${show ? seasonsFormat(movie.number_of_seasons): runtimeFormat(movie.runtime)} | ${getGenre(movie.genres)} | Rating: ${movie.vote_average}`}</p>
                     <Buttons movie={movie} show={show} videos={movie.videos} />
                     <p className="overview">{truncate(movie.overview, 400)}</p>

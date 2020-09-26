@@ -11,15 +11,20 @@
     background-color: #111;       
 }
 .nav__logo{
-    position: fixed;
+    position: absolute;
     left: 20px;
     width: 80px;
     object-fit: contain;
     cursor: pointer;
 }
+.search{
+    position: absolute;
+    right: 100px;
+}
 .nav__avatar{
-    position: fixed;
-    right: 20px;
+    position: absolute;
+    right: 60px;
+    top:16px;
     width: 30px;
     object-fit: contain;
 }
