@@ -12,6 +12,7 @@ export default function useQuerySearch(query, pageNumber){
     }, [query]);
 
     useEffect(()=>{
+        if(query){
         setLoading(true);
         setError(false);
         let cancel;
@@ -27,19 +28,18 @@ export default function useQuerySearch(query, pageNumber){
                         id: movie.id,
                         name: movie.media_type === "tv"? movie.name: movie.title,
                         poster_path: movie.poster_path,
-                        backdrop_path: movie.backdrop_path,
                         media_type: movie.media_type,
                     }
                 })];
             });
-            setHasMore(res.data.total_pages > pageNumber);
+            setHasMore(pageNumber < 20);
             setLoading(false);
-            console.log(res.data);
+    
         }).catch(e => {
             if(axios.isCancel(e)) return;
             setError(true);
         })
-        return () => cancel();
+        return () => cancel();}
     }, [query, pageNumber]);
 
     return { loading, error, movies, hasMore };

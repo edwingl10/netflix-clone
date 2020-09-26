@@ -13,14 +13,11 @@ function SearchResults(){
     const observer = useRef();
 
     const lastMovieElement = useCallback(node => {
-        //console.log("hasmore: " + hasMore);
         if(loading) return
         if(observer.current) observer.current.disconnect();
 
         observer.current = new IntersectionObserver(entries => {
-            //console.log(entries[0]);
             if(entries[0].isIntersecting && hasMore){
-                //console.log("active");
                 setPageNumber(prevPageNumber => prevPageNumber + 1);
             }
         })
@@ -31,33 +28,40 @@ function SearchResults(){
         setQuery(e.target.value);
         setPageNumber(1);
     }
-         
+
+    if(error && !movies){
+        return(
+            <div>
+            <input className="search__bar" onChange={handleChange}/>
+            <h1 className="no-results">There was an error.</h1>
+            </div>
+        )
+    }
+
     if(!loading && movies.length === 0){
         return(
             <div>
             <input className="search__bar" onChange={handleChange}/>
-            <h1 style={{color: "white", marginTop: "100px", textAlign:"center"}}>Your seach did not have any results.</h1>
+            <h1 className="no-results">Your seach did not have any results.</h1>
             </div>
         ) 
     }
 
     return(
         <div>
-            <input className="search__bar" onChange={handleChange}/>
-
+            <input className="search__bar" onChange={handleChange} placeholder="search"/>
             <div className="results">
             {movies.map((movie,index) => {
-               //console.log(movie);
                 if(movies.length === index + 1){
                     return (
                         <Link to={`/${movie.media_type === "tv" ? "tv": "movie"}/${movie.id}`} >
-                            <img ref={lastMovieElement} className="poster" key={counter++} src={`${base_url}${movie.poster_path}`} alt="test" />
+                            <img ref={lastMovieElement} className="poster" key={counter++} src={`${base_url}${movie.poster_path}`} alt={movie.name} />
                         </Link>
                     )
                 }else{
                     return (
                         <Link to={`/${movie.media_type === "tv" ? "tv": "movie"}/${movie.id}`} >
-                            <img className="poster" key={counter++} src={`${base_url}${movie.poster_path}`} alt="test" />
+                            <img className="poster" key={counter++} src={`${base_url}${movie.poster_path}`} alt={movie.name} />
                         </Link>
                     )
                 }
