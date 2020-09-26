@@ -19,7 +19,7 @@ function App() {
         <Route path="/movies" component={MoviesResults} />
         <Route path="/new" component={NowPlaying} />
         <Route path="/mylist" component={MyList} />
-        <Route path="/:id" component={Movie} />
+        <Route path="/:media/:id" component={Movie} />
         <Route path="/" component={Home} />
       </Switch>
     </Router>

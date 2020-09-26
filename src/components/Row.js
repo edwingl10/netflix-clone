@@ -29,10 +29,7 @@ function Row(props) {
                     if(movie.poster_path && movie.backdrop_path){
                         return (
                             <LazyLoad key={movie.id} placeholder={<ImgPlaceholder />} once={true} height={170} offset={30}>
-                            <Link to={{
-                                pathname: `/${movie.id}`,
-                                state: {show} 
-                            }} 
+                            <Link to={`/${show? "tv": "movie"}/${movie.id}`}
                             key={movie.id}>
                                 <img key={movie.id} className={`row__poster ${isLargeRow && "row__posterLarge"}`} src={`${base_url}${movie.poster_path}`} alt={movie.name} />
                             </Link>
