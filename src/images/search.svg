@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0 (4035a4f, 2020-05-01)"
+   sodipodi:docname="magnifying-glass.svg"
+   id="svg13"
+   width="25"
+   viewBox="-1 0 37.500001 37.560255"
+   version="1.1"
+   height="25">
+  <metadata
+     id="metadata19">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs17" />
+  <sodipodi:namedview
+     inkscape:current-layer="svg13"
+     inkscape:window-maximized="0"
+     inkscape:window-y="55"
+     inkscape:window-x="0"
+     inkscape:cy="27.213152"
+     inkscape:cx="25.734329"
+     inkscape:zoom="6.2757353"
+     units="px"
+     showgrid="false"
+     id="namedview15"
+     inkscape:window-height="723"
+     inkscape:window-width="1164"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0"
+     guidetolerance="10"
+     gridtolerance="10"
+     objecttolerance="10"
+     borderopacity="1"
+     bordercolor="#666666"
+     pagecolor="#ffffff" />
+  <path
+     d="M 25.137129,22.288161 C 29.736007,15.921492 28.19792,7.1055236 21.7039,2.597909 15.209879,-1.9097055 6.2175666,-0.40285916 1.6197869,5.964887 c -4.5977797,6.366669 -3.0607918,15.18156 3.4343274,19.689174 4.6351331,3.217263 10.7633087,3.464994 15.6522267,0.634406 l 10.622683,10.351895 c 1.146975,1.18372 3.055299,1.231113 4.262697,0.106632 1.207398,-1.123404 1.255739,-2.994304 0.109865,-4.178025 -0.03626,-0.0377 -0.07141,-0.07217 -0.109865,-0.10771 z m -11.76746,0.965071 c -5.1317159,0.0011 -9.2922398,-4.074625 -9.2955357,-9.105705 -0.0011,-5.0310795 4.1561293,-9.110013 9.2889437,-9.112167 5.125123,-0.00215 9.28345,4.0670855 9.293338,9.091702 0.0088,5.032157 -4.146242,9.117553 -9.280155,9.12617 -0.0022,0 -0.0033,0 -0.0066,0 z m 0,0"
+     style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.278479"
+     id="path10" />
+</svg>

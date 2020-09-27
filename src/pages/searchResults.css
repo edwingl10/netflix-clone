@@ -11,6 +11,18 @@
     color: #fff;
     border: 2px solid white;
     text-align: center;
+    animation: grow 0.3s ease-in-out;
+}
+@keyframes grow{
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 40%;
+    }
+}
+.search__bar:focus{
+    outline: none;
 }
 .results{
     margin-top: 100px;
