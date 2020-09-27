@@ -33,7 +33,6 @@ function Buttons(props){
             })
             .catch(error => setTrailerUrl("SqSiUVUvVCE"));
         }
-
     }, [movie, show, videos]);
 
     return(

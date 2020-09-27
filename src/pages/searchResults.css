@@ -1,7 +1,7 @@
 .search__bar{
     position: fixed;
-    width: 30%;
-    height: 20px;
+    width: 40%;
+    height: 25px;
     max-width: 460px;
     top: 15px;
     right: 120px;
@@ -10,8 +10,6 @@
     background-color: #111;
     color: #fff;
     border: 2px solid white;
-}
-.search__bar{
     text-align: center;
 }
 .results{

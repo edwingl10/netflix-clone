@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useQuerySearch from '../useQuerySearch';
 import './searchResults.css';
 
-const base_url = "https://image.tmdb.org/t/p/w185/";
+const base_url = "https://image.tmdb.org/t/p/w154/";
 let counter = 0;
 
 function SearchResults(){
@@ -32,8 +32,8 @@ function SearchResults(){
     if(error && !movies){
         return(
             <div>
-            <input className="search__bar" onChange={handleChange}/>
-            <h1 className="no-results">There was an error.</h1>
+            <input className="search__bar" onChange={handleChange} placeholder="search" />
+            <h1 className="no-results">There was an error. Please try again later.</h1>
             </div>
         )
     }
@@ -41,7 +41,7 @@ function SearchResults(){
     if(!loading && movies.length === 0){
         return(
             <div>
-            <input className="search__bar" onChange={handleChange}/>
+            <input className="search__bar" onChange={handleChange} placeholder="search" />
             <h1 className="no-results">Your seach did not have any results.</h1>
             </div>
         ) 
@@ -49,18 +49,18 @@ function SearchResults(){
 
     return(
         <div>
-            <input className="search__bar" onChange={handleChange} placeholder="search"/>
+            <input className="search__bar" onChange={handleChange} placeholder="search" autoFocus/>
             <div className="results">
             {movies.map((movie,index) => {
                 if(movies.length === index + 1){
                     return (
-                        <Link to={`/${movie.media_type === "tv" ? "tv": "movie"}/${movie.id}`} >
+                        <Link to={`/${movie.media_type === "tv" ? "tv": "movie"}/${movie.id}`} key={counter++}>
                             <img ref={lastMovieElement} className="poster" key={counter++} src={`${base_url}${movie.poster_path}`} alt={movie.name} />
                         </Link>
                     )
                 }else{
                     return (
-                        <Link to={`/${movie.media_type === "tv" ? "tv": "movie"}/${movie.id}`} >
+                        <Link to={`/${movie.media_type === "tv" ? "tv": "movie"}/${movie.id}`} key={counter++}>
                             <img className="poster" key={counter++} src={`${base_url}${movie.poster_path}`} alt={movie.name} />
                         </Link>
                     )
