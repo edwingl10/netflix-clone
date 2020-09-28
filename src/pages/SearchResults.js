@@ -7,7 +7,7 @@ const base_url = "https://image.tmdb.org/t/p/w154/";
 let counter = 0;
 
 function SearchResults(){
-    const [query, setQuery] = useState('');
+    const [query, setQuery] = useState(sessionStorage.getItem('search') || '');
     const [pageNumber, setPageNumber] = useState(1);
     const { movies, hasMore, loading, error } = useQuerySearch(query, pageNumber);
     const observer = useRef();
@@ -25,14 +25,15 @@ function SearchResults(){
     }, [loading, hasMore]);
     
     function handleChange(e){
+        sessionStorage.setItem('search', e.target.value);
         setQuery(e.target.value);
         setPageNumber(1);
     }
 
-    if(error && !movies){
+    if(error){
         return(
             <div>
-            <input className="search__bar" onChange={handleChange} placeholder="search" />
+            <input className="search__bar" onChange={handleChange} placeholder="search" value={query} />
             <h1 className="no-results">There was an error. Please try again later.</h1>
             </div>
         )
@@ -41,7 +42,7 @@ function SearchResults(){
     if(!loading && movies.length === 0){
         return(
             <div>
-            <input className="search__bar" onChange={handleChange} placeholder="search" />
+            <input className="search__bar" onChange={handleChange} placeholder="search" value={query} />
             <h1 className="no-results">Your seach did not have any results.</h1>
             </div>
         ) 
@@ -49,7 +50,7 @@ function SearchResults(){
 
     return(
         <div>
-            <input className="search__bar" onChange={handleChange} placeholder="search" autoFocus/>
+            <input className="search__bar" onChange={handleChange} placeholder="search" value={query} autoFocus/>
             <div className="results">
             {movies.map((movie,index) => {
                 if(movies.length === index + 1){
