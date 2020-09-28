@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from '../axios';
 import './Movie.css';
 import Row from '../components/Row';
@@ -67,7 +67,7 @@ function Movie(props){
                     {movie.id ? <div className="info">
                         <span>{show ? releaseFormat(movie.first_air_date) : releaseFormat(movie.release_date)} | </span>
                         <span>{show ? seasonsFormat(movie.number_of_seasons) : runtimeFormat(movie.runtime)} | </span>
-                        <span>{movie.genres ? `${getGenre(movie.genres)} | ` : ''}</span>
+                        {movie.genres && <span>{<Link className="genre" to={`/genres/${show?'tv':'movie'}/${getGenre(movie.genres)}`}>{getGenre(movie.genres)}</Link> } | </span>}
                         <span>{displayRating(movie.vote_average)}</span>
                     </div>: <div />}
                     {movie.id && <Buttons movie={movie} show={show} videos={movie.videos} />}

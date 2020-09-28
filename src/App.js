@@ -8,12 +8,14 @@ import MoviesResults from './pages/MoviesResults';
 import MyList from './pages/MyList';
 import NowPlaying from './pages/NowPlaying';
 import SearchResults from './pages/SearchResults';
+import Genres from './pages/Genres';
 
 function App() {
   return (
     <Router>
       <Nav />
       <Switch>
+        <Route path="/genres/:media/:genre" component={Genres} />
         <Route path="/search" component={SearchResults} />
         <Route path="/shows" component={ShowsResults} />
         <Route path="/movies" component={MoviesResults} />
