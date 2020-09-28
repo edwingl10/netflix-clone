@@ -10,20 +10,20 @@ import { truncate } from '../truncate';
 
 function seasonsFormat(num){
     if(!num)
-        return '';
-    return ' | ' + (num > 1 ? `${num} Seasons` : `${num} Season`);
+        return null;
+    return num > 1 ? `${num} Seasons` : `${num} Season`;
 }
 function runtimeFormat(minutes){
     if(!minutes)
-        return '';
+        return null;
     if(minutes < 60)
-        return ' | '+minutes;
-    return ` | ${Math.floor(minutes / 60)}h ${minutes % 60}m`;
+        return minutes;
+    return `${Math.floor(minutes / 60)}h ${minutes % 60}m`;
 }
 function getGenre(obj){
     if(!obj)
-        return '';
-    return ' | ' + obj[Object.keys(obj)[0]]["name"];
+        return null;
+    return obj[Object.keys(obj)[0]]["name"];
 }
 function releaseFormat(date){
     try{
@@ -34,8 +34,8 @@ function releaseFormat(date){
 }
 function displayRating(rating){
     if(!rating)
-        return '';
-    return ` | Rating: ${rating}`;
+        return 'Not yet Rated';
+    return `Rating: ${rating}`;
 }
 
 
@@ -58,22 +58,18 @@ function Movie(props){
         }
         fetchMovieData();
     }, [id, show]);
-
-    function displayMovieInfo(){
-        let info = '';
-        info += (show ? releaseFormat(movie.first_air_date) : releaseFormat(movie.release_date))
-        info += (show ? seasonsFormat(movie.number_of_seasons): runtimeFormat(movie.runtime));
-        info += getGenre(movie.genres);
-        info += displayRating(movie.vote_average);
-        return info;
-    }
  
     return(
         <div className="movie">
             <div className="movie-container">
                 <div className="movie-text">
                     <h2>{movie.id && show ? movie.name: movie.title}</h2>
-                    <p className="info">{movie.id && displayMovieInfo()}</p>
+                    {movie.id ? <div className="info">
+                        <span>{show ? releaseFormat(movie.first_air_date) : releaseFormat(movie.release_date)} | </span>
+                        <span>{show ? seasonsFormat(movie.number_of_seasons) : runtimeFormat(movie.runtime)} | </span>
+                        <span>{movie.genres ? `${getGenre(movie.genres)} | ` : ''}</span>
+                        <span>{displayRating(movie.vote_average)}</span>
+                    </div>: <div />}
                     {movie.id && <Buttons movie={movie} show={show} videos={movie.videos} />}
                     <p className="overview">{movie.id && truncate(movie.overview, 400)}</p>
                 </div>
@@ -83,10 +79,9 @@ function Movie(props){
                 </div>
             </div>    
             
-            <Row title={`More ${getGenre(movie.genres)}`} fetchUrl={requestSimilar(show, id, "similar")} show={show} />
-            <Row title={`Recommended`} fetchUrl={requestSimilar(show, id, "recommendations")} show={show} />
+            {movie.id && <Row title={`More ${getGenre(movie.genres)}`} fetchUrl={requestSimilar(show, id, "similar")} show={show} />}
+            {movie.id && <Row title={`Recommended`} fetchUrl={requestSimilar(show, id, "recommendations")} show={show} />}
         </div>
     )
 }
-
 export default Movie;
