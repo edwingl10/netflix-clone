@@ -12,9 +12,9 @@ export const movieids = {
     "Horror": 27,
     "Music": 10402,
     "Mystery": 9648, 
-    "Rommance": 10749,
+    "Romance": 10749,
     "Science Fiction": 878,
-    "Tv Movie": 10770,
+    "TV Movie": 10770,
     "Thriller": 53,
     "War": 10752,
     "Western": 37
