@@ -14,7 +14,9 @@ function Row(props) {
     useEffect(() => {
         async function fetchData(){
             const request = await axios.get(fetchUrl);
-            request.status === 200 && setMovies(request.data.results);
+            request.status === 200 && setMovies(() =>{
+                return request.data.results.filter(el => el.poster_path && el.backdrop_path);
+            });
             return request;
         }
         fetchData();
@@ -26,19 +28,14 @@ function Row(props) {
  
             <div className="row__posters">
                 {movies.map(movie => {
-                    if(movie.poster_path && movie.backdrop_path){
-                        return (
-                            <LazyLoad key={movie.id} placeholder={<ImgPlaceholder />} once={true} height={170} offset={30}>
-                            <Link to={`/${show? "tv": "movie"}/${movie.id}`}
-                            key={movie.id}>
-                                <img key={movie.id} className={`row__poster ${isLargeRow && "row__posterLarge"}`} src={`${base_url}${movie.poster_path}`} alt={movie.name} />
-                            </Link>
-                            </LazyLoad>
-                        );
-                    }
-                    else{
-                        return <div key={movie.id}/>
-                    }
+                    return (
+                        <LazyLoad key={movie.id} placeholder={<ImgPlaceholder />} once={true} height={170} offset={30}>
+                        <Link to={`/${show? "tv": "movie"}/${movie.id}`}
+                        key={movie.id}>
+                            <img key={movie.id} className={`row__poster ${isLargeRow && "row__posterLarge"}`} src={`${base_url}${movie.poster_path}`} alt={movie.name} />
+                        </Link>
+                        </LazyLoad>
+                    );
                 })}
             </div>
           
