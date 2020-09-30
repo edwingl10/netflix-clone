@@ -4,6 +4,7 @@ import './SignIn.css';
 import { auth } from '../firebase';
 import googleIcon from '../images/google.svg';
 
+
 function LoginDialog(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,8 +17,8 @@ function LoginDialog(){
         .catch(e => setError(e.message));
     }
     
-
     return(
+        <div className="bg">
         <div className="container">
         <h1 className="container-title">Sign In</h1>
             {error !== null && <div>{error}</div>}
@@ -37,6 +38,7 @@ function LoginDialog(){
 
             <p className="signup"> New to Nedflix? <Link to="/signUp" className="signup-link">Sign up now</Link></p>
 
+      </div>
       </div>
     )
 }
