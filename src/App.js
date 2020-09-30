@@ -9,12 +9,14 @@ import MyList from './pages/MyList';
 import NowPlaying from './pages/NowPlaying';
 import SearchResults from './pages/SearchResults';
 import Genres from './pages/Genres';
+import SignIn from './components/SignIn';
 
 function App() {
   return (
     <Router>
       <Nav />
       <Switch>
+        <Route path="/signIn" component={SignIn} />
         <Route path="/genres/:media/:genre" component={Genres} />
         <Route path="/search" component={SearchResults} />
         <Route path="/shows" component={ShowsResults} />

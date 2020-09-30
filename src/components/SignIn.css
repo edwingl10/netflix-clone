@@ -1,0 +1,93 @@
+.container{
+    position: absolute;
+    width: 90%;
+    max-width: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1F1F1F;
+}
+.container-title{
+    color: #fff;
+    text-align: center;
+    font-size: 32px;
+    margin-top: 20px;
+}
+.error{
+    color: #e87c03;
+    font-size: 18px;
+    text-align: center;
+    padding-top: 20px;
+}
+.input{
+    display: block;
+    width: 90%;
+    height: 50px;
+    background-color: #1F1F1F;
+    box-sizing: border-box;
+    border: 1px solid #525252;
+    color: #fff;
+    margin: 20px;
+    padding-left: 20px;
+    font-size: 20px;
+}
+.input::placeholder{
+    color: #fff;
+    font-size: 20px;
+}
+.input:focus{
+    outline: none;
+}
+.signin-btn{
+    background-color: #e50914;
+    box-sizing: border-box;
+    width: 90%;
+    color: #fff;
+    font-size: 16px;
+    height: 48px;
+    margin: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.forgot-container{
+    position: relative;
+    width: 90%; 
+}
+.forgot-password{
+    position: absolute;
+    top: 0;
+    right: 0px;
+    text-decoration: none;
+    color: #737373;
+}
+.forgot-password:hover{
+    text-decoration: underline;
+}
+.google-container{
+    width: 90%;
+    margin: 30px 20px 20px;
+    cursor: pointer;
+}
+.google{
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
+.google-text{
+    color: #737373;
+}
+.signup{
+    color: #737373;
+    margin: 20px;
+}
+.signup-link{
+    color: #fff;
+    text-decoration: none;
+}
+.signup-link:hover{
+    text-decoration: underline;
+}
+.text{
+    color: #fff;
+}

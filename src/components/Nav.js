@@ -35,7 +35,7 @@ function Nav(){
             <img className="nav__logo" onClick={clickNav} src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo"/>
             <img className="search" src={searchIcon} alt="search" onClick={handleClick} />
             <img className="nav__avatar" src={profilePic} alt="user avatar" onClick={toggleDropdown} />
-            <div class={`dropdown-content ${dropdown && 'drop'}`}>
+            <div className={`dropdown-content ${dropdown && 'drop'}`}>
                 <Link to="/shows" onClick={toggleDropdown}>Series</Link>
                 <Link to="/movies" onClick={toggleDropdown}>Movies</Link>
                 <Link to="/new" onClick={toggleDropdown}>New</Link>
