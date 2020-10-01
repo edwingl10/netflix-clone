@@ -42,7 +42,8 @@ function LoginDialog(){
             .then((result) => {
                 firestore.collection("users").doc(result.user.uid).set({
                     name: name,
-                    email: email
+                    email: email, 
+                    favorites: []
                 });
                 history.push('/');
             })
@@ -62,7 +63,8 @@ function LoginDialog(){
                 if(!doc.exists){
                     firestore.collection("users").doc(result.user.uid).set({
                         name: result.user.displayName,
-                        email: result.user.email
+                        email: result.user.email, 
+                        favorites: []
                     });
                 }
             })
