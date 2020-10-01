@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import './SignIn.css';
-import { auth, googleAuth } from '../firebase';
+import { auth, googleAuth, firestore } from '../firebase';
 import googleIcon from '../images/google.svg';
 
 
@@ -34,18 +34,49 @@ function LoginDialog(){
         .catch(e => setError(e.message));
     }
     function signUser(){
-        auth.createUserWithEmailAndPassword(email, password)
-        .then(() => history.push('/'))
-        .catch( e => setError(e.message));
+        if(!name){
+            setError("Name is required");
+        }
+        else{
+            auth.createUserWithEmailAndPassword(email, password)
+            .then((result) => {
+                firestore.collection("users").doc(result.user.uid).set({
+                    name: name,
+                    email: email
+                });
+                history.push('/');
+            })
+            .catch( e => setError(e.message));
+        }
     }
     function toggleDialog(){
         setSignUp(prevSignUp => !prevSignUp);
     }
     function googleSignIn(){
         auth.signInWithPopup(googleAuth)
-        .then(()=> history.push('/'))
+        .then((result)=> {
+            let errorMessage = "";
+            let document = firestore.collection("users").doc(result.user.uid);
+            document.get()
+            .then(doc => {
+                if(!doc.exists){
+                    firestore.collection("users").doc(result.user.uid).set({
+                        name: result.user.displayName,
+                        email: result.user.email
+                    });
+                }
+            })
+            .catch(error => {errorMessage=error})
+
+            if(errorMessage)
+                throw errorMessage;
+
+            history.push('/');      
+        })
         .catch(e => setError(e.message));
     }   
+
+
 
     if(authState.pending){
         return <div className="bg"/>
