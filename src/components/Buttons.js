@@ -80,7 +80,7 @@ function Buttons(props){
     function modList(){
         if(!favorite){
             firestore.collection("users").doc(authState.user.uid).update({
-                [`favorites.${movie.id}`]: {"img": movie.poster_path, "show": show, "name": show? movie.name : movie.title }
+                [`favorites.${movie.id}`]: {"img": movie.poster_path, "name": show? movie.name : movie.title, "show": show }
             }).then(() => setFavorite(true))
         }
         else{
