@@ -48,8 +48,14 @@ function Buttons(props){
     useEffect(()=>{
         async function isFavorite(id){
             const test = await firestore.collection("users").doc(id).get();
-            const fav = test.data().favorites[movie.id];
-            fav ? setFavorite(true) : setFavorite(false);
+            let fav;
+            try{
+                fav = test.data().favorites[movie.id];
+                fav ? setFavorite(true) : setFavorite(false);
+            }catch(e){
+                setFavorite(false);
+            }
+            
         }
         if(movie && authState.user){
             isFavorite(authState.user.uid);
@@ -74,13 +80,11 @@ function Buttons(props){
     function modList(){
         if(!favorite){
             firestore.collection("users").doc(authState.user.uid).update({
-                //favorites: firebase.firestore.FieldValue.arrayUnion({"id": movie.id, "img": movie.poster_path, "show": show})
-                [`favorites.${movie.id}`]: {"img": movie.poster_path, "show": show}
+                [`favorites.${movie.id}`]: {"img": movie.poster_path, "show": show, "name": show? movie.name : movie.title }
             }).then(() => setFavorite(true))
         }
         else{
             firestore.collection("users").doc(authState.user.uid).update({
-                //favorites: firebase.firestore.FieldValue.arrayRemove({"id": movie.id, "img": movie.poster_path, "show": show})
                 [`favorites.${movie.id}`]: firebase.firestore.FieldValue.delete()
             }).then(()=>setFavorite(false))
         }
