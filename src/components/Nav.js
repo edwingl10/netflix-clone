@@ -8,17 +8,21 @@ import { auth } from '../firebase';
 function Nav(){
     const [show, handleShow] = useState(false);
     const [dropdown, setDropdown] = useState(false);
-    const [isSignedIn, setIsSignedIn] = useState(!!auth.currentUser);
     let history = useHistory();
     let location = useLocation();
     
-    auth.onAuthStateChanged((user) => {
-        if (user) {
-          setIsSignedIn(true);
-        } else {
-          setIsSignedIn(false);
-        }
-      });
+    const [authState, setAuthState] = useState({
+        isSignedIn: false,
+        pending: true,
+        user: null,
+    });
+
+    useEffect(() => {
+        const unregisterAuthObserver = auth.onAuthStateChanged(user =>
+            setAuthState({ user, pending: false, isSignedIn: !!user })
+        )
+        return () => unregisterAuthObserver();
+    }, []);
 
     function clickNav(){
         matchPath(location.pathname, {path:'/:id'}) ? history.push("/") : window.scrollTo(0,0);
@@ -51,7 +55,7 @@ function Nav(){
                 <Link to="/movies" onClick={toggleDropdown}>Movies</Link>
                 <Link to="/new" onClick={toggleDropdown}>New</Link>
                 <Link to="/mylist" onClick={toggleDropdown}>My List</Link>
-                {!isSignedIn ? <Link to="/signIn" onClick={toggleDropdown}>Sign In</Link> : <span onClick={()=>{auth.signOut(); toggleDropdown()}}>Sign Out</span>}
+                {!authState.isSignedIn ? <Link to="/signIn" onClick={toggleDropdown}>Sign In</Link> : <span onClick={()=>{auth.signOut(); toggleDropdown()}}>Sign Out</span>}
             </div>
         </div>
     )

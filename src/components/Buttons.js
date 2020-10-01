@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { auth, firestore } from '../firebase';
+import firebase from 'firebase/app';
 import './Buttons.css';
 import ModalVideo from 'react-modal-video';
 import 'react-modal-video/scss/modal-video.scss';
@@ -13,14 +16,21 @@ function Buttons(props){
     const openModal = () => {setOpen(true)}
     const closeModal = () => {setOpen(false)}
     const { movie, show, videos } = props;
+    const [favorite, setFavorite] = useState(false);
 
-    function getTrailer(trailers){
-        let trailer = '';
-        trailers.forEach(res =>{
-            res.type === "Trailer" && (trailer = res.key)
-        });
-        trailer ? setTrailerUrl(trailer) : setTrailerUrl("SqSiUVUvVCE");
-    }
+    const [authState, setAuthState] = useState({
+        isSignedIn: false,
+        pending: true,
+        user: null,
+    });
+    let history = useHistory();
+
+    useEffect(() => {
+        const unregisterAuthObserver = auth.onAuthStateChanged(user =>
+            setAuthState({ user, pending: false, isSignedIn: !!user })
+        )
+        return () => unregisterAuthObserver();
+    }, []);
 
     useEffect(() =>{
         if(videos){
@@ -35,10 +45,51 @@ function Buttons(props){
         }
     }, [movie, show, videos]);
 
+    useEffect(()=>{
+        async function isFavorite(id){
+            const test = await firestore.collection("users").doc(id).get();
+            const fav = test.data().favorites[movie.id];
+            fav ? setFavorite(true) : setFavorite(false);
+        }
+        if(movie && authState.user){
+            isFavorite(authState.user.uid);
+        }
+    }, [authState.user, movie]);
+
+    function getTrailer(trailers){
+        let trailer = '';
+        trailers.forEach(res =>{
+            res.type === "Trailer" && (trailer = res.key)
+        });
+        trailer ? setTrailerUrl(trailer) : setTrailerUrl("SqSiUVUvVCE");
+    }
+    function addToFavorites(){
+        if(!authState.pending && authState.isSignedIn){
+            modList();
+        }
+        else{
+            history.push("/signIn");
+        }
+    }
+    function modList(){
+        if(!favorite){
+            firestore.collection("users").doc(authState.user.uid).update({
+                //favorites: firebase.firestore.FieldValue.arrayUnion({"id": movie.id, "img": movie.poster_path, "show": show})
+                [`favorites.${movie.id}`]: {"img": movie.poster_path, "show": show}
+            }).then(() => setFavorite(true))
+        }
+        else{
+            firestore.collection("users").doc(authState.user.uid).update({
+                //favorites: firebase.firestore.FieldValue.arrayRemove({"id": movie.id, "img": movie.poster_path, "show": show})
+                [`favorites.${movie.id}`]: firebase.firestore.FieldValue.delete()
+            }).then(()=>setFavorite(false))
+        }
+    }
+
     return(
         <div className="banner__buttons">
             <button className="banner__button" onClick={openModal}>Play</button>
-            <button className="banner__button" onClick={openModal}>+ My List</button>
+            <button className={`banner__button ${favorite && 'green'}`} onClick={addToFavorites}>+ My List</button>
             <ModalVideo channel="youtube" isOpen={open} videoId={trailerUrl} onClose={closeModal} />
         </div>
     )

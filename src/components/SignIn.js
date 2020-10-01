@@ -43,7 +43,7 @@ function LoginDialog(){
                 firestore.collection("users").doc(result.user.uid).set({
                     name: name,
                     email: email, 
-                    favorites: []
+                    favorites: {}
                 });
                 history.push('/');
             })
@@ -64,7 +64,7 @@ function LoginDialog(){
                     firestore.collection("users").doc(result.user.uid).set({
                         name: result.user.displayName,
                         email: result.user.email, 
-                        favorites: []
+                        favorites: {}
                     });
                 }
             })
