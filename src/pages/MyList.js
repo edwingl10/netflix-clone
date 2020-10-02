@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { auth, firestore } from '../firebase';
-import { Redirect, Link } from 'react-router-dom';
-import LazyLoad from 'react-lazyload';
+import { Link, useHistory } from 'react-router-dom';
 import './MyList.css';
 
 const base_url = "https://image.tmdb.org/t/p/w154/";
@@ -13,6 +12,7 @@ function MyList(){
         user: null,
     });
     const [favorites, setFavorites] = useState({});
+    let history = useHistory();
 
     useEffect(() => {
         const unregisterAuthObserver = auth.onAuthStateChanged(user =>
@@ -32,7 +32,7 @@ function MyList(){
     }, [authState.user]);
 
     if(!authState.pending && !authState.isSignedIn){
-        return <Redirect to="/signIn" />
+        history.push("/signIn");
     }
 
     return(

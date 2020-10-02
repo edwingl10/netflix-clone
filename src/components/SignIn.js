@@ -30,7 +30,7 @@ function LoginDialog(){
 
     function login(){
         auth.signInWithEmailAndPassword(email, password)
-        .then(() => history.push('/'))
+        .then(() => history.goBack())
         .catch(e => setError(e.message));
     }
     function signUser(){
@@ -45,7 +45,7 @@ function LoginDialog(){
                     email: email, 
                     favorites: {}
                 });
-                history.push('/');
+                history.goBack();
             })
             .catch( e => setError(e.message));
         }
@@ -73,7 +73,7 @@ function LoginDialog(){
             if(errorMessage)
                 throw errorMessage;
 
-            history.push('/');      
+            history.goBack();      
         })
         .catch(e => setError(e.message));
     }   
