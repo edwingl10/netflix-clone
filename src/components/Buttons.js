@@ -93,7 +93,7 @@ function Buttons(props){
     return(
         <div className="banner__buttons">
             <button className="banner__button" onClick={openModal}>Play</button>
-            <button className={`banner__button ${favorite && 'green'}`} onClick={addToFavorites}>+ My List</button>
+            <button className={`banner__button ${authState.user && favorite && 'green'}`} onClick={addToFavorites}>+ My List</button>
             <ModalVideo channel="youtube" isOpen={open} videoId={trailerUrl} onClose={closeModal} />
         </div>
     )
