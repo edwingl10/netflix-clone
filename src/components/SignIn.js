@@ -27,7 +27,7 @@ function LoginDialog(){
         return () => unregisterAuthObserver();
     }, [])
 
-
+    
     function login(){
         auth.signInWithEmailAndPassword(email, password)
         .then(() => history.goBack())
@@ -98,7 +98,7 @@ function LoginDialog(){
             
             {!signUp ? <button className="signin-btn" onClick={login}>Sign In</button> : <button className="signin-btn" onClick={signUser}>Sign Up</button>}
             {!signUp && <div className="forgot-container">
-                <Link className="forgot-password" to="/forgot-password">Forgot password?</Link>
+                <Link className="forgot-password" to="/password-reset">Forgot password?</Link>
             </div>}
             <div className="google-container">
                 <img className="google" src={googleIcon} alt="google icon" />

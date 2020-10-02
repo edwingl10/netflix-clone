@@ -10,6 +10,7 @@ import NowPlaying from './pages/NowPlaying';
 import SearchResults from './pages/SearchResults';
 import Genres from './pages/Genres';
 import SignIn from './components/SignIn';
+import PasswordReset from './pages/PasswordReset';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Nav />
       <Switch>
         <Route path="/signIn" component={SignIn} />
+        <Route path="/password-reset" component={PasswordReset} />
         <Route path="/genres/:media/:genre" component={Genres} />
         <Route path="/search" component={SearchResults} />
         <Route path="/shows" component={ShowsResults} />
